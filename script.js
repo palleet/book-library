@@ -40,15 +40,20 @@ addBtn.addEventListener("click", function (e) {
     const authorInput = document.getElementById("author").value;
     const pagesInput = document.getElementById("pages").value;
     const readInput = document.getElementById("read").checked;
+    // error check if title, author, or pages are empty
+    if (titleInput === "" || authorInput === "" || pagesInput === "") {
+        alert("Please fill out all fields.");
+        return;
+    }
     addBookToLibrary(new Book(titleInput, authorInput, pagesInput, readInput));
     displayBooks();
 });
 
 // test books to test display
-addBookToLibrary(new Book("Foundation", "Isaac Asmiov", "296", true));
-addBookToLibrary(new Book("Catch-22", "Joseph Heller", "544", true));
-addBookToLibrary(new Book("Sorry, Bro", "Taleen Voskuni", "368", true));
-addBookToLibrary(new Book("The Brothers Karamazov", "Fyodor Dostoevsky", "824", false));
+// addBookToLibrary(new Book("Foundation", "Isaac Asmiov", "296", true));
+// addBookToLibrary(new Book("Catch-22", "Joseph Heller", "544", true));
+// addBookToLibrary(new Book("Sorry, Bro", "Taleen Voskuni", "368", true));
+// addBookToLibrary(new Book("The Brothers Karamazov", "Fyodor Dostoevsky", "824", false));
 
 // display books
 function displayBooks() {
