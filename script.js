@@ -69,7 +69,7 @@ function displayBooks() {
 
         // add bookImage properties
         bookImage.classList.add("bookImage");
-        bookImage.src = "/images/book.png";
+        bookImage.src = "./images/book.png";
         bookImage.alt = "Book";
         let hueDegrees = Math.floor(Math.random() * 359);
         bookImage.style.filter = "hue-rotate(" + hueDegrees + "deg)";
