@@ -1,8 +1,6 @@
 const bookCollection = document.getElementById("bookCollection");
-const titleInput = document.getElementById("title").value;
-const authorInput = document.getElementById("author").value;
-const pagesInput = document.getElementById("pages").value;
-const readInput = document.getElementById("read").value;
+
+const addBtn = document.getElementById("addBtn");
 
 const myLibrary = [];
 
@@ -37,6 +35,15 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
+addBtn.addEventListener("click", function (e) {
+    const titleInput = document.getElementById("title").value;
+    const authorInput = document.getElementById("author").value;
+    const pagesInput = document.getElementById("pages").value;
+    const readInput = document.getElementById("read").checked;
+    addBookToLibrary(new Book(titleInput, authorInput, pagesInput, readInput));
+    displayBooks();
+});
+
 // test books to test display
 addBookToLibrary(new Book("Foundation", "Isaac Asmiov", "296", true));
 addBookToLibrary(new Book("Catch-22", "Joseph Heller", "544", true));
@@ -45,6 +52,7 @@ addBookToLibrary(new Book("The Brothers Karamazov", "Fyodor Dostoevsky", "824", 
 
 // display books
 function displayBooks() {
+    bookCollection.replaceChildren();
     for (book of myLibrary) {
         // console.log(book.info());
         let bookCard = document.createElement("div");
