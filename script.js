@@ -48,6 +48,12 @@ addBtn.addEventListener("click", function (e) {
     }
     addBookToLibrary(new Book(titleInput, authorInput, pagesInput, readInput));
     displayBooks();
+
+    // clear input fields
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").checked = false;
 });
 
 // test books to test display
@@ -59,7 +65,7 @@ addBtn.addEventListener("click", function (e) {
 // display books
 function displayBooks() {
     bookCollection.replaceChildren();
-    for (book of myLibrary) {
+    for (let i = 0; i < myLibrary.length; i++) {
         // console.log(book.info());
         let bookCard = document.createElement("div");
         let bookImage = document.createElement("img");
@@ -67,12 +73,14 @@ function displayBooks() {
         let bookAuthor = document.createElement("div");
         let bookPages = document.createElement("div");
         let bookRead = document.createElement("div");
+        let delBtn = document.createElement("button");
+
+        let book = myLibrary[i];
 
         // add bookImage properties
         bookImage.classList.add("bookImage");
         bookImage.src = "./images/book.png";
         bookImage.alt = "Book";
-
         bookImage.style.filter = "hue-rotate(" + book.hueDegrees + "deg)";
 
         // add bookTitle properties
@@ -95,6 +103,15 @@ function displayBooks() {
         let readContent = document.createTextNode(book.haveRead());
         bookRead.appendChild(readContent);
 
+        // add delBtn properties
+        delBtn.classList.add("delBtn");
+        let delContent = document.createTextNode("Delete");
+        delBtn.appendChild(delContent);
+        delBtn.addEventListener("click", function (e) {
+            myLibrary.splice(i, 1);
+            displayBooks();
+        });
+
         // add bookCard children
         bookCard.classList.add("bookCard");
         bookCard.appendChild(bookImage);
@@ -102,6 +119,15 @@ function displayBooks() {
         bookCard.appendChild(bookAuthor);
         bookCard.appendChild(bookPages);
         bookCard.appendChild(bookRead);
+        bookCard.appendChild(delBtn);
+
+        bookCard.addEventListener("mouseover", (event) => {
+            delBtn.style.display = "block";
+        });
+
+        bookCard.addEventListener("mouseout", (event) => {
+            delBtn.style.display = "none";
+        });
 
         bookCollection.appendChild(bookCard);
     }
