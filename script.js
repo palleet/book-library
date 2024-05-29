@@ -9,6 +9,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.hueDegrees = Math.floor(Math.random() * 359);
     this.info = function () {
         let readText;
         if (this.read) {
@@ -71,8 +72,8 @@ function displayBooks() {
         bookImage.classList.add("bookImage");
         bookImage.src = "./images/book.png";
         bookImage.alt = "Book";
-        let hueDegrees = Math.floor(Math.random() * 359);
-        bookImage.style.filter = "hue-rotate(" + hueDegrees + "deg)";
+
+        bookImage.style.filter = "hue-rotate(" + book.hueDegrees + "deg)";
 
         // add bookTitle properties
         bookTitle.classList.add("bookTitle");
